@@ -3,7 +3,7 @@ package redisWeb
 import (
 	"net/http"
 
-	"github.com/CunningMatthew/redisutil"
+	"github.com/CunningMatthew/wolvs/redis/redisUtil"
 	"github.com/gorilla/mux"
 )
 
