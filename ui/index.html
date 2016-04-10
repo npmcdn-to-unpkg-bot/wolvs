@@ -13,8 +13,23 @@
     </header>
 
     <script type="text/template" id="welcome-choice-template">
-        <a class="button new-game-button">New Game</a>
-        <a class="button join-game-button">Join Game</a>
+        <a class="button new-game-button" href="#/new">New Game</a>
+        <a class="button join-game-button" href="#/join">Join Game</a>
+    </script>
+
+    <script type="text/template" id="setup-game-template">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <a class="button" href="#/join">Create Game and Join</a>
+                    </td>
+                    <td>
+                        <a class="button" href="#/join">Create Game and Spectate</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js"></script>
@@ -33,17 +48,32 @@
             }
         });
 
+        var SetupGame = Backbone.View.extend({
+            el: '.page',
+            render : function() {
+                var template = _.template($('#setup-game-template').html());
+                this.$el.html(template);
+            }
+        });
+
         var Router = Backbone.Router.extend({
             routes : {
-                '' : 'home'
+                '' : 'home',
+                'new' : 'setupGame'
             }
         });
 
         var welcomeChoice = new WelcomeChoice();
+        var setupGame = new SetupGame();
 
         var router = new Router();
+
         router.on('route:home', function () {
             welcomeChoice.render();
+        });
+
+        router.on('route:setupGame', function () {
+            setupGame.render();
         });
 
         Backbone.history.start();

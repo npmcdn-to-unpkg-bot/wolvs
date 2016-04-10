@@ -28,9 +28,9 @@ body {
 
 .inner {
     position: relative;
-    margin: 0 auto;
+    margin: 0 auto 0 40%;
+    width: 20%;
     top:50%;
-    left:50%;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -46,8 +46,7 @@ body {
     user-select: none;
     position: absolute;
     height: 60px;
-    width: 300px;
-    margin-left: -150px;
+    width: 100%;
     text-align: center;
     font-size: 5rem;
     line-height: 60px;
@@ -68,4 +67,8 @@ body {
 
 .join-game-button {
     margin-top: 15px;
+}
+
+a:link {
+    text-decoration: none;
 }
