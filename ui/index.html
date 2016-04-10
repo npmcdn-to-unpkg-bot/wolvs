@@ -2,34 +2,65 @@
 <html lang="en">
 <head>
     <title>Wolvs</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--[if lte IE 8]><script src="content/css/red/assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="content/css/red/assets/css/main.css" />
 </head>
 <body>
-    <header class="main-header" style="background-image: url(content/images/background.jpg)">
-        <div class="vertical tint">
-            <div class="page inner">
-            </div>
-        </div>
-    </header>
+    <div id="wrapper" class="container">
+        <section class="main major style2" style="text-align: center">
+            <div class="page"/>
+        </section>
+    </div>
 
     <script type="text/template" id="welcome-choice-template">
-        <a class="button new-game-button" href="#/new">New Game</a>
-        <a class="button join-game-button" href="#/join">Join Game</a>
+        <h2>Welcome to Wolvs</h2>
+        <ul class="actions">
+            <div class="row uniform 50%">
+                <div class="12u$">
+                    <a class="button big special fit" href="#/new">New Game</a>
+                </div>
+                <div class="12u$">
+                    <a class="button big special fit" href="#/join">Join Game</a>
+                </div>
+            </div>
+        </ul>
     </script>
 
     <script type="text/template" id="setup-game-template">
-        <table>
-            <tbody>
-                <tr>
-                    <td>
-                        <a class="button" href="#/join">Create Game and Join</a>
-                    </td>
-                    <td>
-                        <a class="button" href="#/join">Create Game and Spectate</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <h2>Create a new game</h2>
+        <div class="row uniform 50%">
+            <div class="6u$ 12u$(xsmall)" style="text-align: left">
+                <input type="checkbox" id="customize-roles" name="customize-roles">
+                <label for="customize-roles">Customize Roles</label>
+            </div>
+            <div class="6u 12u$(xsmall)">
+                <a class="button big special fit" href="#/create-and-join">Create & Join</a>
+            </div>
+            <div class="6u 12u$(xsmall)">
+                <a class="button big special fit" href="#/create-and-spectate">Create & Spectate</a>
+            </div>
+            <div class="12u$">
+                <a class="button" href="#/">Back</a>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="join-game-template">
+        <h2>Join an existing game</h2>
+        <div class="row uniform 50%">
+            <div class="6u 12u$(xsmall)">
+                <input type="text" name="demo-name" id="demo-name" value="" placeholder="Room Code">
+            </div>
+            <div class="6u 12u$(xsmall)">
+                <a class="button special fit" href="#/join-seat">Join</a>
+                <a class="button fit" href="#/join-and-spectate">Join as spectator</a>
+            </div>
+            <div class="12u$">
+                <a class="button" href="#/">Back</a>
+            </div>
+        </div>
     </script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js"></script>
@@ -56,15 +87,25 @@
             }
         });
 
+        var JoinGame = Backbone.View.extend({
+            el: '.page',
+            render : function() {
+                var template = _.template($('#join-game-template').html());
+                this.$el.html(template);
+            }
+        });
+
         var Router = Backbone.Router.extend({
             routes : {
                 '' : 'home',
-                'new' : 'setupGame'
+                'new' : 'setupGame',
+                'join' : 'joinGame'
             }
         });
 
         var welcomeChoice = new WelcomeChoice();
         var setupGame = new SetupGame();
+        var joinGame = new JoinGame();
 
         var router = new Router();
 
@@ -74,6 +115,10 @@
 
         router.on('route:setupGame', function () {
             setupGame.render();
+        });
+
+        router.on('route:joinGame', function () {
+            joinGame.render();
         });
 
         Backbone.history.start();
