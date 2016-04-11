@@ -3,33 +3,21 @@ package redisWeb
 import (
 	"net/http"
 
+	"github.com/CunningMatthew/wolvs/common/web"
 	"github.com/CunningMatthew/wolvs/redis/redisUtil"
 	"github.com/gorilla/mux"
 )
 
 func setHandler(writer http.ResponseWriter, request *http.Request) {
 	vars := mux.Vars(request)
-	key := vars["key"]
-	value := vars["value"]
-	message, err := redisUtil.SetString(key, value)
-	if err != nil {
-		http.Error(writer, message, 400)
-	} else {
-		writer.WriteHeader(200)
-		writer.Write([]byte(message))
-	}
+	message, err := redisUtil.SetString(vars["key"], vars["value"])
+	commonWeb.WriteAcceptedMessageOrError(writer, message, err)
 }
 
 func getHandler(writer http.ResponseWriter, request *http.Request) {
 	vars := mux.Vars(request)
-	key := vars["key"]
-
-	message, err := redisUtil.GetString(key)
-	if err != nil {
-		http.Error(writer, message, 400)
-	} else {
-		writer.Write([]byte(message))
-	}
+	message, err := redisUtil.GetString(vars["key"])
+	commonWeb.WriteMessageOrError(writer, message, err)
 }
 
 //RegisterRoutes will register the redis web endpoints
