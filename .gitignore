@@ -26,3 +26,6 @@ _testmain.go
 *.exe
 .idea/*
 ui/content/css/*
+ui/node_modules/*
+ui/app/*.js*
+ui/typings/*
