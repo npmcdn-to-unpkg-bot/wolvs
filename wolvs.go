@@ -23,6 +23,7 @@ func main() {
 
 	router.HandleFunc("/", homeHandler).Methods("GET")
 	redisWeb.RegisterRoutes(router)
+	roles.RegisterRoutes(router)
 
 	n := negroni.Classic()
 
