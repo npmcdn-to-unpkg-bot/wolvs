@@ -6,6 +6,7 @@ import (
 
 	"github.com/CunningMatthew/wolvs/redis/redisUtil"
 	"github.com/CunningMatthew/wolvs/redisweb"
+	"github.com/CunningMatthew/wolvs/rolesWeb"
 	"github.com/codegangsta/negroni"
 	"github.com/gorilla/mux"
 )
@@ -23,7 +24,7 @@ func main() {
 
 	router.HandleFunc("/", homeHandler).Methods("GET")
 	redisWeb.RegisterRoutes(router)
-	roles.RegisterRoutes(router)
+	rolesWeb.RegisterRoutes(router)
 
 	n := negroni.Classic()
 
