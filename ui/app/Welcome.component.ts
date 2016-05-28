@@ -1,8 +1,8 @@
 /**
  * Created by Matthew on 2016-04-24.
  */
-import {Component} from 'angular2/core'
-import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {Component} from '@angular/core'
+import {ROUTER_DIRECTIVES} from '@angular/router';
 
 @Component({
     selector: 'wolvs-app',

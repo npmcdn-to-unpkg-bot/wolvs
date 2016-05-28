@@ -1,5 +1,5 @@
-import {Component} from 'angular2/core'
-import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {Component} from '@angular/core'
+import {Routes, ROUTER_DIRECTIVES, Router} from '@angular/router';
 import {NewGameComponent} from './NewGame.component'
 import {JoinGameComponent} from './JoinGame.component'
 import {WelcomeComponent} from './Welcome.component'
@@ -10,10 +10,14 @@ import {WelcomeComponent} from './Welcome.component'
     template: `<router-outlet></router-outlet>`
 })
 
-@RouteConfig([
-    {path: '/', name:'Welcome', component: WelcomeComponent},
-    {path: '/new', name: 'NewGame', component: NewGameComponent},
-    {path: '/join', name: 'JoinGame', component: JoinGameComponent}
+@Routes([
+    {path: '/', component: WelcomeComponent},
+    {path: '/NewGame', component: NewGameComponent},
+    {path: '/JoinGame', component: JoinGameComponent}
 ])
 
-export class AppComponent { }
+export class AppComponent {
+    constructor(private _router:Router){
+
+    }
+}

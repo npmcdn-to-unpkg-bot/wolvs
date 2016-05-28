@@ -2,9 +2,9 @@ package common
 
 //Role is a description and name for a role a seated player will have
 type Role struct {
-	Name         string
-	Description  string
-	MaximumRatio int //0 indicates only one of this role may be present, every other number is assumed out of 10.
+	Name         string `json:"name"`
+	Description  string `json:"description"`
+	MaximumRatio int    `json:"maximumRatio"` //0 indicates only one of this role may be present, every other number is assumed out of 10.
 }
 
 //RoleInteraction is coupled with a Role to determine outcomes based on certain
